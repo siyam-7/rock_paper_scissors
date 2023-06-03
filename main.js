@@ -26,6 +26,9 @@ function singleRound(playerSelection,computerSelection){
     else if(player == computerSelection){
         return "Try Again";
     }
+    else if(player !== 'ROCK' && player !== 'PAPER' && player !=='SCISSORS' ){
+        return "Invalid Input!!";
+    }
     else{
         return win;
     }
@@ -37,7 +40,6 @@ function game()
 {
     var score=0;
     var win = "Yayy! You won!!";
-    var x;
 
   for(i=0; i<5; i++){
     playerSelection=prompt("Enter Rock/Paper/Scissors: ");
@@ -45,7 +47,7 @@ function game()
     if(x==win){
         score++;
     }
-    
+    console.log(x);
     
   }
   return "Your Score is: "+ score;
