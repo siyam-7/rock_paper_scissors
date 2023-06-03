@@ -39,6 +39,7 @@ function singleRound(playerSelection,computerSelection){
 function game()
 {
     var score=0;
+    var cscore=0;
     var win = "Yayy! You won!!";
 
   for(i=0; i<5; i++){
@@ -47,10 +48,31 @@ function game()
     if(x==win){
         score++;
     }
+    else if(x=="Try Again"){
+        score=score;
+        cscore=cscore;
+    }
+    else if(x =="Invalid Input!!"){
+        score=score;
+        cscore=cscore;
+    }
+    
+  
+    else{
+        cscore++;
+    }
+
     console.log(x);
     
   }
-  return "Your Score is: "+ score;
+  var result ="";
+  if(score>cscore){
+    result = "YOU WON!! ";
+  }
+  else{
+    result = "YOU LOST! ";
+  }
+  return result + "Your Score is: "+ score +". Computer's Score is " + cscore;
 
 }
 
