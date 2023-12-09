@@ -1,3 +1,11 @@
+const rockbutton = document.querySelector('.rock');
+const paperbutton = document.querySelector('.paper');
+const scissorsbutton = document.querySelector('.scissors');
+const container = document.querySelector('.container')
+var cscore=0, score=0, trial=0;
+
+
+
 function getComputerChoice(){
     let rock = "ROCK";
     let paper = "PAPER";
@@ -11,69 +19,120 @@ function getComputerChoice(){
 }
 
 function singleRound(playerSelection,computerSelection){
+    const outcomeDiv =document.querySelector('.outcome');
+    container.append(outcomeDiv);
+
     player = playerSelection.toUpperCase();
     let win = "Yayy! You won!!";
 
     if(player == "ROCK" && computerSelection == "PAPER" ){
-        return "You Lose! Paper beats Rock";
+        cscore++;
+        trial++;
+        const p = document.createElement('p');
+        p.innerText =  "You Lose! Paper beats Rock";
+        outcomeDiv.innerText=p.innerText;
+
     }
     else if(player == "PAPER" && computerSelection == "SCISSORS"){
-        return "You Lose! Scissors beats Paper";
-    }
+        cscore++;
+        trial++;
+        const p = document.createElement('p');
+        p.innerText =  "You Lose! Scissors beats Paper";
+        outcomeDiv.innerText=p.innerText;
+        }
     else if(player == "SCISSORS" && computerSelection == "ROCK"){
-        return "You Lose! Rock beats Scissors";
+        cscore++;
+        trial++;
+        const p = document.createElement('p');
+        p.innerText =  "You Lose! Rock beats Scissors";
+        outcomeDiv.innerText=p.innerText;
+
+
     }
     else if(player == computerSelection){
-        return "Try Again";
+        trial++;
+        const p = document.createElement('p');
+        p.innerText =  "Try again";
+        outcomeDiv.innerText=p.innerText;
+
     }
     else if(player !== 'ROCK' && player !== 'PAPER' && player !=='SCISSORS' ){
-        return "Invalid Input!!";
+        trial++;
+        const p = document.createElement('p');
+        p.innerText =  "Invalid Input";
+        outcomeDiv.innerText=p.innerText;
+
     }
     else{
-        return win;
-    }
-
-    
-}
-
-function game()
-{
-    var score=0;
-    var cscore=0;
-    var win = "Yayy! You won!!";
-
-  for(i=0; i<5; i++){
-    playerSelection=prompt("Enter Rock/Paper/Scissors: ");
-    x=singleRound(playerSelection,getComputerChoice());
-    if(x==win){
         score++;
-    }
-    else if(x=="Try Again"){
-        score=score;
-        cscore=cscore;
-    }
-    else if(x =="Invalid Input!!"){
-        score=score;
-        cscore=cscore;
-    }
-    
-  
-    else{
-        cscore++;
-    }
+        trial++;
+        const p = document.createElement('p');
+        p.innerText =  win;
+        outcomeDiv.innerText=p.innerText;
 
-    console.log(x);
+    }
+    console.log(trial);
+    console.log(score);
     
-  }
-  var result ="";
-  if(score>cscore){
-    result = "YOU WON!! ";
-  }
-  else{
-    result = "YOU LOST! ";
-  }
-  return result + "Your Score is: "+ score +". Computer's Score is " + cscore;
 
+    
+}
+function checkCount(){
+    if(trial<=4){
+        return true;
+    }
+}
+function resultAll(){
+    if(trial==5){
+        trial++;
+        const outcomeDiv =document.querySelector('.outcome');
+        container.append(outcomeDiv);
+        if(score>cscore){
+            result = "YOU WON!! ";
+          }
+          else if(score==cscore){
+            result = "IT'S A TIE! ";
+          }
+          else{
+            result = "YOU LOST!";
+          }
+        const p = document.createElement('p');
+        const resultnode= result + "Your Score is: "+ score +". Computer's Score is " + cscore;
+        p.innerText = resultnode;
+        outcomeDiv.appendChild(p);
+
+        
+
+    }
 }
 
-console.log(game());
+paperbutton.addEventListener('click', function(){
+    const computerSelection = getComputerChoice();
+    const playerSelection = 'PAPER';
+    if (checkCount()){
+    singleRound(playerSelection,computerSelection);
+    };
+    resultAll();
+    
+});
+
+rockbutton.addEventListener('click', function(){
+    const computerSelection = getComputerChoice();
+    const playerSelection = 'ROCK';
+    if (checkCount()){
+    singleRound(playerSelection,computerSelection);
+    };
+    resultAll();
+
+});
+
+scissorsbutton.addEventListener('click', function(){
+    const computerSelection = getComputerChoice();
+    const playerSelection = 'SCISSORS';
+    if (checkCount()){
+    singleRound(playerSelection,computerSelection);
+    };
+    resultAll();
+
+});
+
